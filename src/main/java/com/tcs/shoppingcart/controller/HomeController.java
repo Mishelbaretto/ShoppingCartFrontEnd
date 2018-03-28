@@ -53,6 +53,15 @@ public class HomeController {
 			mv.addObject("isUserClickedLogin", true);
 			return mv;
 		}
+		@GetMapping("/logout")
+		public ModelAndView  logout() {
+			ModelAndView mv=new ModelAndView("home");
+			httpSession.invalidate();
+			mv.addObject("logoutMessage", "You are successfully logged out");
+			return mv;
+		}
+		
+		
 
 		//http://localhost:8080/ShoppingCartFrontEnd/register
 		@GetMapping("/register")

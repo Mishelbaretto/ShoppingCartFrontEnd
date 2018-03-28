@@ -10,7 +10,7 @@
 </head>
 <body>
 ${supplierSuccessMessage}
-${supplierErrorMessage }
+ ${supplierErrorMessage }
 
 Supplier Management
 <form action="supplier/save/" method="post">
@@ -36,9 +36,10 @@ Supplier Management
 </tr>
 
 
+<tr>
 
-
-<input type="submit" value='create supplier'>
+<td><input type="submit" value='Submit'></td>
+</tr>
 </table>
 </form>
 <div>

@@ -10,12 +10,14 @@
 <body>
 
 	<center>
-		<h2>welcome to shopping cart</h2>
+		<h2>Welcome to Shopping Cart</h2>
+		${logoutMessgae}
 	</center>
 	 
 	<br>
 	<a href="login"> Existing user</a>
 	<a href="register"> New user</a>
+	<a href="logout"> Logout</a>
 	<hr class="blue" size="5">
 	<jsp:include page="product-menu.jsp"></jsp:include>
 	

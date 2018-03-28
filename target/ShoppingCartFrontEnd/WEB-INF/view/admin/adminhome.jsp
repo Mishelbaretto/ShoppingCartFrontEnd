@@ -10,9 +10,9 @@
 </head>
 <body>
 <h2>
-<a href="managecategories">manage categories</a>
-<a href="managesupplier">manage suppliers</a>
-<a href="manageproducts">manage products</a>
+<a href="managecategories">Manage Categories</a>
+<a href="managesuppliers">Manage Suppliers</a>
+<a href="manageproducts">Manage Products</a>
 </h2>
 <c:if test="${isAdminClickedManageCategories==true }">
 

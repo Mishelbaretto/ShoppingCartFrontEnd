@@ -35,6 +35,7 @@ public class CategoryController {
 	@Autowired HttpSession httpSession;
 	//http://localhost:8080/shoppingcart/category/get/cate_001
 	//@GetMapping("/category/get{id}")
+	
 	@RequestMapping(name="/category/get/{id}" , method=RequestMethod.GET)
 	public ModelAndView getCategory(@RequestParam("id") String id) {
 		//based on id,fetch the details from categorydao
@@ -53,7 +54,7 @@ public class CategoryController {
 	public ModelAndView saveCategory(@RequestParam("id")String id,
 			@RequestParam("name")String name,
 			@RequestParam("description")String description) {
-		ModelAndView mv=new ModelAndView();
+		ModelAndView mv=new ModelAndView("redirect:/managecategories");
 		
 		category.setId(id);
 		category.setName(name);
@@ -74,9 +75,9 @@ public class CategoryController {
 		if(categoryDAO.save(category)){
 			mv.addObject("successMessage","The Category created successfully");
 			//fetch all the categries again
-		List<Category> categories=	categoryDAO.list();
+	//	List<Category> categories=	categoryDAO.list();
 			// and set to http session
-		httpSession.setAttribute("categories", categories);
+	//	httpSession.setAttribute("categories", categories);
 		}else
 		{
 			mv.addObject("errorMessage","could not create successfully ");

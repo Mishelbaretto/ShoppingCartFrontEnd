@@ -42,7 +42,7 @@ public class UserController {
 		else {
 			//valid credentials
 			//mv.addObject("welcomeMessage","Welcom Mr/Mrs"+user.getName());
-			httpSession.setAttribute("welcomeMessage","Welcom Mr/Mrs"+user.getName());
+			httpSession.setAttribute("welcomeMessage","Welcome Mr/Mrs"+user.getName());
 			if(user.getRole()=='A') {
 				httpSession.setAttribute("isAdmin", true);
 			}

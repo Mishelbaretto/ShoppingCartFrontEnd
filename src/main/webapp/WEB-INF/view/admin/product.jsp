@@ -10,10 +10,117 @@
 </head>
 <body>
 
-Product Management
+
+${productSuccessMessage}
+${productErrorMessage }
+${uploadMessage}
+
+
+<form action="product/save/" method="post" enctype="multipart/form-data">
+
+<table>
+<tr>
+<td>ID </td>
+
+<td><input type="text" name='id'  value="${selectedProduct.id }"> </td>
+</tr>
+
+
+<tr>
+<td>NAME</td>
+
+<td><input type="text" name='name' value="${selectedProduct.name}"> </td>
+</tr>
+
+<tr>
+<td>DESCRIPTION</td>
+
+<td><input type="text" name='description' value="${selectedProduct.description }"> </td>
+</tr>
+
+<tr>
+<td>PRICE</td>
+
+<td><input type="text" name='price' value="${selectedProduct.price }"> </td>
+</tr>
+
+
+<tr>
+<td>Category</td>
+<td>
+<select name="categoryID">
+<c:forEach var="category" items="${ categories}">
+<option value="${category.id }">${category.name }</option>
+</c:forEach>
 
 
 
+
+</select>
+
+</td>
+</tr>
+
+<tr>
+<td>
+ProductImage: <input type="file" name="file">
+
+
+</td>
+</tr>
+
+<tr>
+<td>Supplier</td>
+<td>
+<select name="supplierID">
+
+<c:forEach var="supplier" items="${suppliers}">
+
+	<option value="${supplier.id}" >${supplier.name}</option>
+
+		</c:forEach>
+
+
+</select>
+
+</td>
+</tr>
+
+<tr>
+<td><input type="submit" value='create product'></td>
+</tr>
+</table>
+</form>
+<div>
+<table border="5" bgcolor="cyan">
+
+<tr>
+<td> Product ID</td>
+<td> Product Name</td>
+<td> Product Description</td>
+<td>Action</td>
+</tr>
+   <c:forEach var="product" items="${products}">
+   <tr>
+   <td>${product.id} </td>
+    <td>${product.name} </td>
+     <td>${product.description} </td>
+     <td><a href="product/delete/?id=${product.id}">Delete</a></td>
+     <td><a href="product/edit/?id=${product.id}">Edit</a> </td>
+   </tr>
+
+
+
+
+</c:forEach>
+</table>
+
+
+</div>
 
 </body>
+
+
+
+
 </html>

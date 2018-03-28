@@ -9,36 +9,67 @@
 <title>Insert title here</title>
 </head>
 <body>
+${supplierSuccessMessage}
+ ${supplierErrorMessage }
+
 Supplier Management
-<form action="">
+<form action="supplier/save/" method="post">
 <table>
 <tr>
 <td>ID </td>
 
-<td>ID:<input type="text" name='id'> </td>
+<td><input type="text" name='id' value="${selectedSupplier.id }"> </td>
 </tr>
 
 
 <tr>
 <td>NAME</td>
 
-<td>NAME:<input type="text" name='name'> </td>
+<td><input type="text" name='name' value="${selectedSupplier.name }"> </td>
 </tr>
 
 
 <tr>
 <td>ADDRESS</td>
 
-<td>ADDRESS:<input type="text" name='address'></td>
+<td><input type="text" name='address' value="${selectedSupplier.address }"></td>
 </tr>
 
 
+<tr>
 
-
-<input type="submit" value='create supplier'>
-
+<td><input type="submit" value='Submit'></td>
+</tr>
 </table>
 </form>
+<div>
+<table border="5" bgcolor="cyan">
+
+<tr>
+<td> Supplier ID</td>
+<td> Supplier Name</td>
+<td> Supplier Address</td>
+<td>Action</td>
+</tr>
+   <c:forEach var="supplier" items="${suppliers}">
+   <tr>
+   <td>${supplier.id} </td>
+    <td>${supplier.name} </td>
+     <td>${supplier.address} </td>
+     <td><a href="supplier/delete/?id=${supplier.id}">Delete</a></td>
+     <td><a href="supplier/edit/?id=${supplier.id}">Edit</a> </td>
+   </tr>
+
+
+
+
+</c:forEach>
+</table>
+
+
+</div>
+
+
 
 
 

@@ -12,26 +12,26 @@ ${categorySuccessMessage}
 ${categoryErrorMessage }
 
 Category Management
-<form action="category/save" method="post">
+<form action="category/save/" method="post">
 
 <table>
 <tr>
 <td>ID </td>
 
-<td>ID:<input type="text" name='id'> </td>
+<td><input type="text" name='id'  value="${selectedCategory.id }"> </td>
 </tr>
 
 
 <tr>
 <td>NAME</td>
 
-<td>NAME:<input type="text" name='name'> </td>
+<td><input type="text" name='name' value="${selectedCategory.name}"> </td>
 </tr>
 
 <tr>
 <td>DESCRIPTION</td>
 
-<td>DESCRIPTION:<input type="text" name='description'> </td>
+<td><input type="text" name='description' value="${selectedCategory.description }"> </td>
 </tr>
 
 
@@ -54,10 +54,8 @@ Category Management
    <td>${category.id} </td>
     <td>${category.name} </td>
      <td>${category.description} </td>
-     <td><a href="category/delete/?id=${category.id}">Delete</a> |
-     <a href="edit">Edit</a>
-     
-      </td>
+     <td><a href="category/delete/?id=${category.id}">Delete</a></td>
+     <td><a href="category/edit/?id=${category.id}">Edit</a> </td>
    </tr>
 
 
