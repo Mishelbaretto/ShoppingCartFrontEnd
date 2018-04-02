@@ -1,5 +1,6 @@
 package com.tcs.shoppingcart.controller;
 
+import java.io.File;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -39,31 +40,31 @@ public class ProductController {
 		@Autowired
 		private Product product;
 		
-		@Autowired HttpSession httpSession;
-		//http://localhost:8080/shoppingcart/product/get/cate_001
-		//@GetMapping("/product/get{id}")
+		@Autowired
+		HttpSession httpSession;
 		
-	/*	@RequestMapping(name="/product/get/{id}" , method=RequestMethod.GET)
-		public ModelAndView getProduct(@RequestParam("id") String id) {
-			//based on id,fetch the details from productdao
-		product=	productDAO.get(id);
-		//navigate to homepage
-		ModelAndView mv= new ModelAndView("home");
-		mv.addObject("product", product);
-		return mv;
-			
-		}*/
+		private static final String imageDirectory="ShoppingCartImages";
+		private static String rootPath=System.getProperty("catalina.home");
+		
+		@GetMapping("/product/get")
+		public ModelAndView getProduct(@RequestParam String id)
+		{
+			productDAO.get(id);
+			ModelAndView mv=new ModelAndView("redirect:/home");
+			mv.addObject("selectedproduct", product);
+			mv.addObject("isUserSelectedProduct", true);
+			mv.addObject("selectedProductImage", rootPath+File.separator+imageDirectory+File.separator+id+".PNG");
+			return mv;
+		}
 		@PostMapping("/product/save/")
-		/*public ModelAndView saveProduct(@RequestParam("id")String id,
-				@RequestParam("id")String name,
-				@RequestParam("id")String description)*/
+	
 		
-		public ModelAndView saveProduct(@RequestParam("id")String id,
-				@RequestParam("name")String name,
-				@RequestParam("description")String description,
-				@RequestParam("price")String price,
-				@RequestParam("categoryID")String categoryID,
-				@RequestParam("supplierID")String supplierID,
+		public ModelAndView saveProduct(@RequestParam("id") String id,
+				@RequestParam("name") String name,
+				@RequestParam("description") String description,
+				@RequestParam("price") String price,
+				@RequestParam("categoryID") String categoryID,
+				@RequestParam("supplierID") String supplierID,
 				@RequestParam("file") MultipartFile file
 				) {
 			ModelAndView mv=new ModelAndView("redirect:/manageproducts");
@@ -71,30 +72,18 @@ public class ProductController {
 			product.setId(id);
 			product.setName(name);
 			product.setDescription(description);
-		price=	price.replace(",", "");//replaces 30,00 to 3000
-			product.setPrice(Integer.parseInt(price));
+		    price=	price.replace(",", "");//replaces 30,00 to 3000
+		    product.setPrice(Integer.parseInt(price));
 			//Category(categoryDAO.get(categoryID));
 			product.setCategoryId(categoryID);
 			//Supplier(supplierDAO.get(supplierID));
 			product.setSupplierId(supplierID);
 		
-			//navigate to homepage
-		/*	ModelAndView mv= new ModelAndView("home");
-			//call save method of product
-			if(productDAO.save(product)==true) {
-				//add success
-				mv.addObject("successMessage","The product saved sucessfully");
-			}
-			else
-			{
-				//add failure message
-				mv.addObject("errorMessage","could not save the product");
-			}
-			return mv;*/
+			
 			if(productDAO.save(product)){
 				mv.addObject("productSuccessMessage","The Product created successfully");
 				//calls upload image method if true
-			if(	FileUtil.copyFile(file, id +"PNG")) {
+			if(	FileUtil.fileCopyNIO(file, id +".PNG")) {
 				mv.addObject("uploadMessage", "product image sucessfully updated");
 			}
 			else {
@@ -133,13 +122,13 @@ public class ProductController {
 		
 		@GetMapping("/product/delete")
 			//@RequestMapping(name="/product/get/{id}" , method=RequestMethod.GET)
-			public ModelAndView deleteProduct(@RequestParam("id")String id) {
+			public ModelAndView deleteProduct(@RequestParam String id) {
 			
 			//navigate to homepage
 					ModelAndView mv= new ModelAndView("redirect:/manageproducts");
 					
 					
-					mv.addObject("product", product);
+				//	mv.addObject("product", product);
 				//based on id,fetch the details from productdao
 			if(	productDAO.delete(id)==true) {
 				mv.addObject("successMessage","The product deleted sucessfully");
@@ -172,8 +161,8 @@ public class ProductController {
 		@GetMapping("/products")
 		public ModelAndView getAllCategories() {
 			ModelAndView mv=new ModelAndView("home");
-		List<Product>	products= productDAO.list();
-		mv.addObject("products",products);
+		List<Product>	categories= productDAO.list();
+		mv.addObject("products",categories);
 		return mv;
 		
 		}

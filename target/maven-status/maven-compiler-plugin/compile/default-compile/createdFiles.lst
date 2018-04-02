@@ -3,5 +3,6 @@ com\tcs\shoppingcart\controller\HomeController.class
 com\tcs\shoppingcart\controller\CategoryController.class
 com\tcs\shoppingcart\controller\SupplierController.class
 com\tcs\shoppingcart\controller\UserController.class
+com\tcs\shoppingcart\controller\CartController.class
 com\tcs\util\FileUtil.class
 com\tcs\shoppingcart\controller\AdminController.class

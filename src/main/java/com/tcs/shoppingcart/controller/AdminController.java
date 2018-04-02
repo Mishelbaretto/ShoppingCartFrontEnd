@@ -42,6 +42,26 @@ public class AdminController {
 	public ModelAndView adminClickedCategories() {
 		ModelAndView mv=new ModelAndView("home");
 		
+		//1- check wheteher user is logged in or not if not logged in 
+	String loggedInUserID=	(String) httpSession.getAttribute("loggedInUserID");
+	if(loggedInUserID==null) {
+		mv.addObject("errorMessage","Please login do to this operation");
+		return mv;
+
+	}
+		//"pls log in using this operation
+		
+		//2- the already logged in , check what is the role of the user
+Boolean isAdmin=(Boolean)	httpSession.getAttribute("isAdmin");
+	
+		//if the user is not admin
+	//"you are noy authorized to do this operation
+if(isAdmin==null || isAdmin==false) {
+	mv.addObject("errorMessage","You are not authorized to do this operation");
+	return mv;
+}
+		
+		
 		
 		mv.addObject("isAdminClickedManageCategories",true);
 		List<Category> categories = categoryDAO.list();

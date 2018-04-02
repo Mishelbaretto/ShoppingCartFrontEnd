@@ -73,7 +73,7 @@ span.psw {
 
 <h2>Login Form</h2>
 
-<form action="validate" method="get">
+<form action="validate" method="post">
   <div class="imgcontainer">
     <img src="resources/images/avatar.PNG" alt="Avatar" class="avatar">
   </div>
