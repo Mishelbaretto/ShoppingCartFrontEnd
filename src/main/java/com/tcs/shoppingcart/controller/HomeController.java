@@ -56,7 +56,11 @@ public class HomeController {
 		@GetMapping("/logout")
 		public ModelAndView  logout() {
 			ModelAndView mv=new ModelAndView("home");
-			httpSession.invalidate();
+			httpSession.invalidate();//removes all the attribute which are added
+			
+		/*	httpSession.removeAttribute("loggedInUserID");
+			httpSession.removeAttribute("isLoggedIn");
+			httpSession.removeAttribute("isLoggedAdmin");*/
 			mv.addObject("logoutMessage", "You are successfully logged out");
 			return mv;
 		}

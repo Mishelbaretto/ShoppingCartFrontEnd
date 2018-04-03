@@ -11,11 +11,12 @@
 
 
 
-<c:forEach var="cart" items="carts">
+<c:forEach var="cart" items="${cartList}">
 <img alt="" src="${selectedProductImage}"><br>
 
-
-<input type="text" name="price" value="${cart.price}">
+Name:<input type="text" name="price" value="${cart.productName}">
+Price:<input type="text" name="price" value="${cart.price}">
+Quantity:<input type="text" name="price" value="${cart.quantity}">
 
 
 

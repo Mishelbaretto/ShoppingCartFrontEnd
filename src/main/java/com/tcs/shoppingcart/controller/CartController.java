@@ -16,6 +16,8 @@ import com.niit.shoppingcart.domain.Cart;
 
 @Controller
 public class CartController {
+	
+	
 	@Autowired
 	private CartDAO cartDAO;
 	@Autowired
@@ -48,6 +50,7 @@ public class CartController {
 	public ModelAndView getMyCartDetails() {
 		//it will return all the products which are added to cart
 		ModelAndView mv=new ModelAndView("home");
+		mv.addObject("isUserClickedMyCart", true);
 		String loggedInUserID=(String) httpSession.getAttribute("loggedInUserID");
 		if(loggedInUserID==null) {
 			mv.addObject("errorMessage", "Please login to see your cart details");
@@ -58,12 +61,12 @@ public class CartController {
 		return mv;
 		
 	}
-	@GetMapping("/mycart")
+	/*@GetMapping("/mycart")
 	public ModelAndView myCart() {
 		ModelAndView mv=new ModelAndView("home");
 		mv.addObject("isUserClickedMyCart", true);
 		return mv;
-	}
+	}*/
 	
 
 }

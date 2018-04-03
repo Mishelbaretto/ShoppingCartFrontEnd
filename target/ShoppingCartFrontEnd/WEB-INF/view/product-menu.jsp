@@ -63,21 +63,21 @@ li.dropdown {
 <body>
 
 	<ul>
-	<j:forEach var="category" items="${categories}" >
-	<li class="dropdown"><a href="javascript:void(0)" class="dropbtn"> ${category.name }</a>
-	<j:forEach var="product" items="${category.products}">
-	<div class="dropdown-content">
-				<a href="product/get?id=${product.id}">${product.name}</a> 
-			</div>
-	
-	</j:forEach>
-						
-			</li>
-	
-	</j:forEach>
+		<j:forEach var="category" items="${categories}">
+			<li class="dropdown"><a href="#"
+				class="dropbtn"> ${category.name }</a>
+				 <j:forEach var="product"
+					items="${category.products}">
+					<div class="dropdown-content">
+						<a href="product/get?id=${product.id}">${product.name}</a>
+					</div>
+
+				</j:forEach></li>
+
+		</j:forEach>
 	</ul>
 
-		<!--  <li class="dropdown"><a href="javascript:void(0)" class="dropbtn">Eelectronics</a>
+	<!--  <li class="dropdown"><a href="javascript:void(0)" class="dropbtn">Eelectronics</a>
 			<div class="dropdown-content">
 				<a href="#">TV</a> <a href="#">Mobile</a> <a href="#">Laptop</a>
 			</div></li>
@@ -90,20 +90,8 @@ li.dropdown {
 			<div class="dropdown-content">
 				<a href="#">Chairs</a> <a href="#">Tables</a> <a href="#">Beds</a>
 			</div></li>-->
-	
+
 
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-

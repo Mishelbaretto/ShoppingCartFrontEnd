@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.niit.shoppingcart.dao.CategoryDAO;
 import com.niit.shoppingcart.dao.ProductDAO;
@@ -46,7 +48,7 @@ public class ProductController {
 		private static final String imageDirectory="ShoppingCartImages";
 		private static String rootPath=System.getProperty("catalina.home");
 		
-		@GetMapping("/product/get")
+	/*	@GetMapping("/product/get")
 		public ModelAndView getProduct(@RequestParam String id)
 		{
 			productDAO.get(id);
@@ -55,6 +57,19 @@ public class ProductController {
 			mv.addObject("isUserSelectedProduct", true);
 			mv.addObject("selectedProductImage", rootPath+File.separator+imageDirectory+File.separator+id+".PNG");
 			return mv;
+		}*/
+		
+		
+		
+		@GetMapping("/product/get/{id}")
+		public ModelAndView getSelectedProduct(@PathVariable("id") String id, RedirectAttributes redirectAttributes) {
+			
+			ModelAndView mv = new ModelAndView("redirect:/");
+			redirectAttributes.addFlashAttribute("selectedProduct",  productDAO.get(id));
+			redirectAttributes.addFlashAttribute("isUserSelectedProduct",  true);
+			redirectAttributes.addFlashAttribute("selectedProductImage", rootPath +File.separator +imageDirectory +File.separator +id + ".PNG");
+			return mv;
+
 		}
 		@PostMapping("/product/save/")
 	

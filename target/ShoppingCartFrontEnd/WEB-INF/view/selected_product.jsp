@@ -13,13 +13,12 @@
 
 <img alt="" src="${selectedProductImage}"><br>
 
-<input type="text" name="name" value=${selectedproduct.name}>
-<input type="text" name="price" value=${selectedproduct.price}>
-<input type="text" name="quantity" >
-
+<input type="text" name="productName" value ="${selectedproduct.name}"> <br>
+<input type="text" name="price" value="${selectedproduct.price}"> <br>
+<input type="text" name="quantity" > <br>
 Product Description:${selectedproduct.description }
 <input type="submit" value="Add to cart">
 </form>
-<%-- <a href="cart/add?productName=${selectedproduct.name}&price=${selectedproduct.price}">Add to Cart</a>--%>
+
 </body>
 </html>
