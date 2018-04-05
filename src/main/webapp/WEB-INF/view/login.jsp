@@ -75,7 +75,7 @@ span.psw {
 
 <form action="validate" method="post">
   <div class="imgcontainer">
-    <img src="/images/avatar.PNG" alt="Avatar" class="avatar">
+    <img src="resources/images/avatar.PNG" alt="Avatar" class="avatar">
   </div>
 
   <div class="container">
