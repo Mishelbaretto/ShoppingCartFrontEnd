@@ -1,7 +1,9 @@
 package com.tcs.shoppingcart.controller;
 
+import java.io.File;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,13 @@ public class HomeController {
 	
 	@Autowired
 	private HttpSession httpSession;
+	//private static String imageDirectory="resources"+File.separator+"images";
+	//private static String rootPath="resources//images"
+	//"G:\\eclipse oxy\\391\\ShoppingCartFrontEnd\\src\\main\\webapp\\resources\\images";
+	private static String imageDirectory = "G:\\eclipse oxy\\391\\ShoppingCartFrontEnd\\src\\main\\webapp\\resources\\images";
+
+	
+
 	
 	
 	//http://localhost:8080/ShoppingcartFrontEnd/
@@ -33,7 +42,7 @@ public class HomeController {
 	}*/
 	//http://localhost:8080/ShoppingCartFrontEnd/
 	@GetMapping("/")
-	public ModelAndView  home() {
+	public ModelAndView  home(HttpServletRequest request) {
 		ModelAndView mv=new ModelAndView("home");
 		//add the data to mv
 		//we need to fetch all the categories 
@@ -42,6 +51,14 @@ public class HomeController {
 		//add the data to mv
 		//mv.addObject("categories", "categories");
 	httpSession.setAttribute("categories", categories);
+	httpSession.setAttribute("imageDirectory", imageDirectory);
+	String root =request.getContextPath();
+    String imageFolder =  root + File.separator +"src" + File.separator + 
+    		"main" +File.separator +
+    		"webapp"+File.separator +
+    		"resources"+File.separator;	
+    httpSession.setAttribute("imageFolder", imageFolder);
+	
 		
 		return mv;
 	}

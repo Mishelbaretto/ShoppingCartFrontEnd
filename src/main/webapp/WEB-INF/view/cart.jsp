@@ -12,11 +12,13 @@
 
 
 <c:forEach var="cart" items="${cartList}">
-<img alt="" src="${selectedProductImage}"><br>
-
-Name:<input type="text" name="price" value="${cart.productName}">
-Price:<input type="text" name="price" value="${cart.price}">
-Quantity:<input type="text" name="price" value="${cart.quantity}">
+  <!--   <img alt="" src="${selectedProductImage}"><br>-->
+  
+ <!--   <img alt="" src="${ImagesFolder}${cart.productID }.PNG">-->
+ <img alt="" src="resources/images/${cart.productID}.PNG">
+Name:<input type="text" name="price" value="${cart.productName}"><br>
+Price:<input type="text" name="price" value="${cart.price}"><br>
+Quantity:<input type="text" name="price" value="${cart.quantity}"><br>
 
 
 

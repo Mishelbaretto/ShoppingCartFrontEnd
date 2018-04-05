@@ -11,12 +11,13 @@
 
 <form action="cart/add" method="post">
 
-<img alt="" src="${selectedProductImage}"><br>
+<!--  <img alt="" src="${selectedProductImage}"><br>-->
 
-<input type="text" name="productName" value ="${selectedproduct.name}"> <br>
-<input type="text" name="price" value="${selectedproduct.price}"> <br>
-<input type="text" name="quantity" > <br>
-Product Description:${selectedproduct.description }
+<img alt="" src="resources/images/${selectedProduct.id}.PNG">
+Product Name:<input type="text" disabled="disabled" name="productName" value ="${selectedProduct.name}"> <br>
+Price:<input type="text" disabled="disabled" name="price" value="${selectedProduct.price}"> <br>
+Quantity:<input type="text" name="quantity" > <br>
+Description: ${selectedProduct.description }<br>
 <input type="submit" value="Add to cart">
 </form>
 

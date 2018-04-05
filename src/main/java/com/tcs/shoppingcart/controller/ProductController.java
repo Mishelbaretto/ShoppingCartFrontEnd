@@ -45,8 +45,12 @@ public class ProductController {
 		@Autowired
 		HttpSession httpSession;
 		
-		private static final String imageDirectory="ShoppingCartImages";
-		private static String rootPath=System.getProperty("catalina.home");
+		@Autowired
+		FileUtil fileUtil;
+		
+		//private static final String imageDirectory="ShoppingCartImages";
+		//private static String rootPath=System.getProperty("catalina.home");
+		
 		
 	/*	@GetMapping("/product/get")
 		public ModelAndView getProduct(@RequestParam String id)
@@ -67,7 +71,7 @@ public class ProductController {
 			ModelAndView mv = new ModelAndView("redirect:/");
 			redirectAttributes.addFlashAttribute("selectedProduct",  productDAO.get(id));
 			redirectAttributes.addFlashAttribute("isUserSelectedProduct",  true);
-			redirectAttributes.addFlashAttribute("selectedProductImage", rootPath +File.separator +imageDirectory +File.separator +id + ".PNG");
+			//redirectAttributes.addFlashAttribute("productID", rootPath +File.separator +imageDirectory +File.separator +id + ".PNG");
 			return mv;
 
 		}
@@ -98,7 +102,7 @@ public class ProductController {
 			if(productDAO.save(product)){
 				mv.addObject("productSuccessMessage","The Product created successfully");
 				//calls upload image method if true
-			if(	FileUtil.fileCopyNIO(file, id +".PNG")) {
+			if(	fileUtil.fileCopyNIO(file, id +".PNG")) {
 				mv.addObject("uploadMessage", "product image sucessfully updated");
 			}
 			else {
@@ -110,7 +114,7 @@ public class ProductController {
 		//	httpSession.setAttribute("products", products);
 			}else
 			{
-				mv.addObject("productErrorMessage","could not create successfully ");
+				mv.addObject("productErrorMessage","could not create please contact admin ");
 			}
 			return mv;
 				

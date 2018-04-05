@@ -7,12 +7,15 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.niit.shoppingcart.dao.CartDAO;
+import com.niit.shoppingcart.dao.ProductDAO;
 import com.niit.shoppingcart.domain.Cart;
+import com.niit.shoppingcart.domain.Product;
 
 @Controller
 public class CartController {
@@ -21,10 +24,18 @@ public class CartController {
 	@Autowired
 	private CartDAO cartDAO;
 	@Autowired
+	private ProductDAO productDAO;
+	@Autowired
+	private Product product;
+	@Autowired
 	private Cart cart;
 	@Autowired
 	private HttpSession httpSession;
-	@PostMapping("/product/cart/add")
+	
+	
+	
+
+	/*@PostMapping("/product/cart/add")
 	public ModelAndView addToCart(@RequestParam String productName,@RequestParam int price, @RequestParam String quantity) {
 		
 		ModelAndView mv=new ModelAndView("home");
@@ -44,9 +55,43 @@ public class CartController {
 			mv.addObject("errorMessage", "Could not add the product to cart");
 		}
 		return mv;
+	}*/
+	
+	
+	
+	
+	
+	
+	@GetMapping("/product/cart/add/{productID}")
+	public ModelAndView addToCartUsingGetMapping(@PathVariable String productID) {
+		
+		System.out.println("Inside addToCartUsingGetMapping..................");
+		
+		ModelAndView mv=new ModelAndView("home");
+		String loggedInUserID=(String) httpSession.getAttribute("loggedInUserID");
+		
+		if(loggedInUserID==null) {
+			mv.addObject("errorMessage", "please login to add any product to cart");
+			return mv;
+		}
+		//get al the details from productDAO.get()
+		product=productDAO.get(productID);
+		cart.setEmailID(loggedInUserID);
+		cart.setPrice(product.getPrice());
+		cart.setProductID(productID);
+		cart.setProductName(product.getName());
+		cart.setQuantity(1);
+		cart.setId();// to generate random id
+		if(cartDAO.save(cart)) {
+			mv.addObject("errorMessage", "The product added to cart  successfully");
+		}
+		else {
+			mv.addObject("errorMessage", "Could not add the product to cart");
+		}
+		return mv;
 	}
 	//get my cart details
-	@GetMapping("/mycart/")
+	@GetMapping("/mycart")
 	public ModelAndView getMyCartDetails() {
 		//it will return all the products which are added to cart
 		ModelAndView mv=new ModelAndView("home");
