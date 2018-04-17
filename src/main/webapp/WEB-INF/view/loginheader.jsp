@@ -17,19 +17,46 @@
 </head>
 <body>
 
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-inverse"  >
   <div class="container-fluid">
+   
+   
    
     <ul class="nav navbar-nav navbar-left">
       <li><a href="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
      <c:if test="${isLoggedIn==true }">
-        <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        <li><a href="logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
       </c:if>
      
     </ul>
     
+    
+    
+    <form action="search">
+    
+    
+    
+     <div class="col-xs-4">
+     <div class="input-group input-group-sm">
+      <input type="text" class="form-control" placeholder="Search for products" name="searchString">
+      
+      
+      <div class="input-group-btn">
+       
+        <button class="btn btn-default btn-md" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+        </div>
+      </div>
+    </div>
+    
+  </form>
+    
+    
+    
      <ul class="nav navbar-nav navbar-right">
-      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+     <c:if test="${isLoggedIn!=true}">
+     
+      <li><a href="register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+     </c:if>
      <c:if test="${isLoggedIn==true }">
         <li><a href="mycart"><span class="glyphicon glyphicon-shopping-cart"></span>MyCart(${size})</a></li>
       </c:if>

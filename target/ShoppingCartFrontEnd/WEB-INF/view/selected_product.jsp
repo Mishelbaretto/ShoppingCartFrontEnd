@@ -9,16 +9,31 @@
 <body>
 
 
-<form action="cart/add" method="post">
 
-<!--  <img alt="" src="${selectedProductImage}"><br>-->
 
+
+
+
+
+
+
+
+
+
+
+
+<form action="product/cart/add" method="post">
+
+ <img alt="" src="${selectedProductImage}"><br>
+${selectedProduct.id}
 <img alt="" src="resources/images/${selectedProduct.id}.PNG">
-Product Name:<input type="text" disabled="disabled" name="productName" value ="${selectedProduct.name}"> <br>
-Price:<input type="text" disabled="disabled" name="price" value="${selectedProduct.price}"> <br>
-Quantity:<input type="text" name="quantity" > <br>
+Product Name:${selectedProduct.name} <br>
+Price:${selectedProduct.price} <br>
+
 Description: ${selectedProduct.description }<br>
-<input type="submit" value="Add to cart">
+
+<a href="product/cart/add/${selectedProduct.id}">AddtoCart</a>
+
 </form>
 
 </body>
