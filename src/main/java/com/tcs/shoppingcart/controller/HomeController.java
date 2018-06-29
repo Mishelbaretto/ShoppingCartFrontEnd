@@ -14,8 +14,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.niit.shoppingcart.dao.CartDAO;
 import com.niit.shoppingcart.dao.CategoryDAO;
+import com.niit.shoppingcart.dao.ProductDAO;
+import com.niit.shoppingcart.domain.Cart;
 import com.niit.shoppingcart.domain.Category;
+import com.niit.shoppingcart.domain.Product;
 
 @Controller
 public class HomeController {
@@ -28,6 +32,14 @@ public class HomeController {
 	
 	@Autowired
 	private HttpSession httpSession;
+	@Autowired
+	private Product product;
+	@Autowired
+	private ProductDAO productDAO;
+	@Autowired
+	private CartDAO cartDAO;
+	@Autowired
+	private Cart cart;
 	
 	Logger log= LoggerFactory.getLogger(HomeController.class);
 	//private static String imageDirectory="resources"+File.separator+"images";
@@ -89,6 +101,9 @@ public class HomeController {
 			httpSession.removeAttribute("isLoggedIn");
 			httpSession.removeAttribute("isAdmin");
 			httpSession.removeAttribute("success");
+			httpSession.removeAttribute("welcomeMessage");
+			httpSession.removeAttribute("cartsum");
+			httpSession.removeAttribute("total");
 			mv.addObject("carouselDisplayedOnce", true);
 			mv.addObject("logoutMessage", "You are successfully logged out");
 			log.debug("End of the login method");
@@ -106,6 +121,6 @@ public class HomeController {
 			log.debug("End of the registration method");
 			return mv;
 		}
-
+		
 
 }

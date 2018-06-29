@@ -161,7 +161,7 @@ public class ProductController {
 
 	}
 
-	@GetMapping("/product/edit/")
+	@GetMapping("/product/edit")
 	public ModelAndView editProduct(@RequestParam String id) {
 		
 		log.debug("Start of the editProduct  method");
@@ -170,6 +170,7 @@ public class ProductController {
 		product = productDAO.get(id);
 		// mv.addObject("selectedProduct",product);
 		httpSession.setAttribute("selectedProduct", product);
+		System.out.println(product.getName());
 		log.debug("End of the editProduct  method");
 		return mv;
 	}
@@ -192,7 +193,7 @@ public class ProductController {
 		ModelAndView mv = new ModelAndView("home");
 		List<Product> products = productDAO.search(searchString);
 		mv.addObject("products", products);
-		mv.addObject("isUserSelectedProduct", true);
+		mv.addObject("isUserSearchedProduct", true);
 		System.out.println("entering search" + searchString + " is/are : " + products.size());
 		log.info("Number of products with search string " + searchString + " is/are : " + products.size());
 		log.debug("Start of the searchProduct method");

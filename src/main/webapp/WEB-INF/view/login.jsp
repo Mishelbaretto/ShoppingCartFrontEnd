@@ -82,6 +82,11 @@ span.psw {
     <button type="button" class="cancelbtn">Cancel</button>
     <span class="psw">Forgot <a href="#">password?</a></span>
   </div>
+  
+  
+  
+		<input type="hidden" name="${_csrf.parameterName}"
+			value="${_csrf.token}" />
 </form>
 
 </body>

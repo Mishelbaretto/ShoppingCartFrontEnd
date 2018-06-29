@@ -25,7 +25,7 @@ body {
 <body>
 
 	<center>
-		<h2>Welcome to Shopping Cart</h2>
+	<i><h1>Shopping Cart</h1></i>	
 		${logoutMessage} ${success} 
 	</center>
 
@@ -33,10 +33,7 @@ body {
 
 	<jsp:include page="loginheader.jsp"></jsp:include>
 	
-	<!--  	<a href="login"><span class="glyphicon glyphicon-log-in"></span> Existing user</a>
-	<a href="register"><span class="glyphicon glyphicon-user"></span> New user</a>
-	<a href="logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a> -->
-
+	
 
 	<hr class="blue" size="5">
 	<%--<jsp:include page="product-menu.jsp"></jsp:include>--%>
@@ -48,13 +45,15 @@ body {
 	<c:if test="${isUserSelectedProduct==true }">
 		<jsp:include page="selected_product.jsp"></jsp:include>
 	</c:if>
-
+<c:if test="${isUserSearchedProduct==true }">
+		<jsp:include page="selected_product.jsp"></jsp:include>
+	</c:if>
 	<c:if test="${isAdmin==true }">
 		<jsp:include page="admin/adminhome.jsp"></jsp:include>
 	</c:if>
 
 
-
+${cartErrorMessage}
 <c:if test="${carouselDisplayedOnce== true}">
 		<c:if test="${isAdmin!= true}">
 			<c:if test="${isUserClickedMyCart!= true}">
@@ -76,11 +75,19 @@ body {
 	<c:if test="${isUserClickedLogin==true}">
 		<jsp:include page="login.jsp"></jsp:include>
 	</c:if>
+	
+	<c:if test="${isUserClickedCheckout==true}">
+		<jsp:include page="checkout.jsp"></jsp:include>
+	</c:if>
+	<c:if test="${clickedPlaceOrder==true}">
+		<jsp:include page="placeOrder.jsp"></jsp:include>
+		</c:if>
 	<c:if test="${isUserClickedRegister==true}">
 		<jsp:include page="registration.jsp"></jsp:include>
 	</c:if>
+	${cartErrorMessage} <br>
+	 
+	<jsp:include page="footer.jsp"></jsp:include>
 	
-	
-	${ cartErrorMessage}
 </body>
 </html>

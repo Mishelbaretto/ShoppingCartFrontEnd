@@ -10,20 +10,14 @@
 <body>
 
 
+${cartErrorMessage}
+
+<c:if test="${isUserSelectedProduct}">
 
 
 
 
-
-
-
-
-
-
-
-
-
-  <form action="product/cart/add" method="post">  
+ <!--  <form action="product/cart/add" method="post">   -->
 
  <img alt="" src="${selectedProductImage}"><br>
 
@@ -33,28 +27,31 @@ Price:${selectedProduct.price} <br>
 
 Description: ${selectedProduct.description }<br>
 
-<a href="product/cart/add/${selectedProduct.id}">AddtoCart</a>
+
+<a href="product/cart/add/${selectedProduct.id}"   class="btn btn-primary">AddtoCart</a>
+<!-- <a href="buy" class="btn btn-primary"><span class="glyphicon glyphicon-check"></span>BUY</a> <br> -->
+
+</c:if>
+<c:if test="${isUserSearchedProduct}">
+
+   <c:forEach items="${products}" var="product">
 
 
+<img alt="" src="${selectedProductImage}"><br>
+Product Name:${product.name}<br>
+
+Price:${product.price}<br>
 
 
- <c:forEach items="${products}" var="product">
-
-${product.name}
-
-${product.price}
+Description:${product.description}<br>
 
 
-${product.description}
+<a href="product/cart/add/${product.id}"   class="btn btn-primary">AddtoCart</a>
 
-<img alt="" src="resources/images/${product.id}.PNG">
+</c:forEach>    
+<!-- <a href="buy" class="btn btn-primary"><span class="glyphicon glyphicon-check"></span>BUY</a> <br> -->
 
-
-
-</c:forEach>  
-
-
-</form>
-
+<!-- </form> -->
+</c:if>
 </body>
 </html>

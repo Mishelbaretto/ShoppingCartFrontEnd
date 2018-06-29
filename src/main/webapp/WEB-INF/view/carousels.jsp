@@ -5,6 +5,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Home Body</title>
+
+  
 </head>
 
 <body>	
@@ -23,19 +25,21 @@
 	    <div class="carousel-inner">
 	
 	      <div class="item active">
-	        <img src="resources\images\offer.png" alt="Offer on watches" width="460" height="345">
+	       
+	        <img src="file:///G:/eclipse%20oxy/391/ShoppingCartFrontEnd/src/main/webapp/resources/images/offer.PNG" alt="Offer on watches" width="460" height="345">
+	        
 	      </div>
 	
 	      <div class="item">
-	        <img src="resources\images\ShoppingCartImages\offer2_shoes.jpg" alt="Offer on shoes" width="460" height="345">
+	        <img src="file:///G:/eclipse%20oxy/391/ShoppingCartFrontEnd/src/main/webapp/resources/images/offer1.PNG" alt="Offer on shoes" width="460" height="345">
 	      </div>
 	    
 	      <div class="item">
-	        <img src="resources\images\ShoppingCartImages\offer3_bags.jpg" alt="Offer on bags" width="460" height="345">
+	        <img src="file:///G:/eclipse%20oxy/391/ShoppingCartFrontEnd/src/main/webapp/resources/images/offer2.PNG" alt="Offer on bags" width="460" height="345">
 	      </div>
 	
 	      <div class="item">
-	        <img src="resources\images\ShoppingCartImages\offer4_mobiles.jpg" alt="Offer on mobiles" width="460" height="345">
+	        <img src="file:///G:/eclipse%20oxy/391/ShoppingCartFrontEnd/src/main/webapp/resources/images/offer3.PNG" alt="Offer on mobiles" width="460" height="345">
 	      </div>
 	  
 	    </div>

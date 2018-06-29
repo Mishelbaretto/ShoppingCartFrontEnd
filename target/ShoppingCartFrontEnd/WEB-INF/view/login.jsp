@@ -38,16 +38,6 @@ button:hover {
     background-color: #f44336;
 }
 
-.imgcontainer {
-    text-align: center;
-    margin: 24px 0 12px 0;
-}
-
-img.avatar {
-    width: 40%;
-    border-radius: 50%;
-}
-
 .container {
     padding: 16px;
 }
@@ -74,10 +64,7 @@ span.psw {
 <h2>Login Form</h2>
 
 <form action="validate" method="post">
-  <div class="imgcontainer">
-    <img src="resources/images/avatar.PNG" alt="Avatar" class="avatar">
-  </div>
-
+ 
   <div class="container">
     <label for="uname"><b>Username</b></label>
     <input type="text" placeholder="Enter Username" name="uname" required>

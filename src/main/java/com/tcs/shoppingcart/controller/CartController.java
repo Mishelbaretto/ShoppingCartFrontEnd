@@ -35,22 +35,22 @@ public class CartController {
 	@Autowired
 	private HttpSession httpSession;
 
-	@GetMapping("/buy")
+	/*@GetMapping("/buy")
 	public ModelAndView order() {
-		
+
 		log.debug("Starting of the order method");
 		ModelAndView mv = new ModelAndView("home");
 		// there shud be one update method which take emailid as parameter
 		String loggedInUserID = (String) httpSession.getAttribute("loggedInUserID");
 		if (cartDAO.update(loggedInUserID)) {
-		//	mv.addObject("isUserClickedBuy", true);
+			// mv.addObject("isUserClickedBuy", true);
 			mv.addObject("successMessage", "your oredr placed sucessfully");
 		} else {
 			mv.addObject("errorMessage", "your oredrcould not placed sucessfully");
 		}
 		log.debug("Ending of the order method");
 		return mv;
-	}
+	}*/
 
 	/*
 	 * @PostMapping("/product/cart/add") public ModelAndView addToCart(@RequestParam
@@ -98,6 +98,26 @@ public class CartController {
 		return mv;
 	}
 
+	
+	
+	@GetMapping("/remove/{id}")
+	public ModelAndView removeProductFromCart(@PathVariable("id") int id)
+	{
+		log.debug("Starting of the method removeProductFromCart");
+		ModelAndView mv= new ModelAndView("redirect:/mycart");		
+		if (cartDAO.delete(id)==true){
+			mv.addObject("cartProductSucccess", "Product deleted from cart");
+			String loggedInUserID= (String) httpSession.getAttribute("loggedInUserId");
+			List<Cart> usercart= cartDAO.list(loggedInUserID);
+		}
+		else{
+			mv.addObject("cartProductFail", "Product could not be deleted from cart");
+		}
+		log.debug("Ending of the method removeProductFromCart");
+		return mv;
+	}
+	
+	
 	// get my cart details
 	@GetMapping("/mycart")
 	public ModelAndView getMyCartDetails() {
@@ -113,17 +133,22 @@ public class CartController {
 			return mv;
 		}
 		List<Cart> cartList = cartDAO.list(loggedInUserID);
-		if (cartList==null)
-		{
+		if (cartList.isEmpty()) {
 			mv.addObject("noItems", "Your cart is empty");
 		}
-		else {
+		else 
+		{
 			mv.addObject("cartDetails", true);
 			mv.addObject("cartList", cartList);
 			mv.addObject("size", cartList.size());
-			
+			int cartsum = 0;
+			for (Cart a:cartList) 
+			{
+				cartsum = cartsum + a.getPrice();
+			}
+			httpSession.setAttribute("cartsum", cartsum);
 		}
-		
+
 		log.debug("not of products in cart " + cartList.size());
 		log.debug("Ending of the method getMyCartDetails");
 		return mv;
@@ -133,5 +158,45 @@ public class CartController {
 	 * @GetMapping("/mycart") public ModelAndView myCart() { ModelAndView mv=new
 	 * ModelAndView("home"); mv.addObject("isUserClickedMyCart", true); return mv; }
 	 */
+
+	
+	@PostMapping("/checkout")
+	public ModelAndView checkout() {
+		ModelAndView mv = new ModelAndView("home");
+		mv.addObject("isUserClickedCheckout", true);
+		String loggedInUserID = (String) httpSession.getAttribute("loggedInUserID");
+		List<Cart> cartList = cartDAO.list(loggedInUserID);
+		httpSession.setAttribute("cartList", cartList);
+		int cartsum = 0;
+		for (Cart a:cartList) {
+			cartsum = cartsum + a.getPrice();
+		}
+		httpSession.setAttribute("cartsum", cartsum);
+		int total = cartsum+100;
+		httpSession.setAttribute("total", total);
+		return mv;
+	}
+	
+	@PostMapping("/placeOrder")
+	public ModelAndView placeOrder(@RequestParam("emailID") String emailID){
+	ModelAndView mv = new ModelAndView("home");
+	String loggedInUserID = (String) httpSession.getAttribute("loggedInUserID");
+	if(cartDAO.deleteCart(loggedInUserID)==true)
+	{
+		List<Cart> cartList = cartDAO.list(loggedInUserID);
+		httpSession.setAttribute("cartList", cartList);
+	for (Cart a:cartList) {
+			cartDAO.delete(a.getId());
+	}
+		mv.addObject("orderPlacedMessage", "Your Order Placed Successfully...Continue Shopping");
+		mv.addObject("clickedPlaceOrder",true);
+	}
+	else
+	{
+		mv.addObject("orderPlacedMessage", "Sorry, Your order is not Successfully Placed.. Try again after some time !!!");
+	}
+	return mv;
+}
+
 
 }
